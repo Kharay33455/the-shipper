@@ -1,0 +1,255 @@
+#logo {
+    font-size: 40px;
+    font-weight: 900;
+    float: left;
+    font-style: italic;
+}
+body{
+    background-image: conic-gradient(#EBEBE9, #E0EBDB, #E6EDDB, #F6F0DA, #EEF0EB, #DCE6F0, #E9E5E4, #F0E5E3, #EBEBE9);
+
+}
+
+.track {
+    padding: 1%;
+    font-weight: 700;
+    color: white;
+
+}
+
+.car-link {
+    text-decoration: none;
+}
+
+.car-link:hover {
+    text-decoration: none;
+}
+
+.track_button {
+    margin-bottom: 5%;
+    width: 60%;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+
+}
+
+.carousel-des {
+    position: absolute;
+    bottom: 2%;
+    left: 20%;
+    width: 60%;
+
+}
+
+.car-body {
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 30px;
+    color: blue;
+    background-color: yellowgreen;
+}
+
+.carousel-item {
+    position: relative;
+}
+
+.w-100 {
+    height: 400px;
+}
+
+.my_row {
+    background-image: url('/static/images/package.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+
+    background-position-x: left;
+    background-position-y: top;
+}
+
+.my_row::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.my_col {
+    float: left;
+    width: 50%;
+
+}
+
+.my_row2::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.three_col {
+    float: left;
+    width: 33.333%;
+    padding: 20px;
+}
+
+.inner {
+    border-style: groove;
+    box-shadow: 10px;
+    padding: 20px;
+    height: 300px;
+}
+
+.save {
+    color: white;
+    background-color: #3879B6;
+    padding: 5%;
+    margin: 10%;
+}
+
+#blinker {
+    display: none;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 5;
+}
+
+.quotes-form {
+    border: ridge;
+    border-width: thin;
+    background-color: wheat;
+    padding: 3%;
+    margin: 5%;
+}
+
+.discounts {
+    padding: 2%;
+    background-color: #3879B6;
+    color: white
+}
+
+.explore {
+    background-color: black;
+    color: whitesmoke;
+
+}
+
+.explore::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.explore_col {
+    float: left;
+    width: 25%;
+    padding: 10px;
+}
+
+.explore_head {
+    color: whitesmoke;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.explore_header {
+    text-decoration: underline;
+    margin-bottom: 20px;
+}
+
+.bottom-links {
+    color: whitesmoke;
+}
+
+.bottom-links:visited {
+    color: whitesmoke;
+}
+
+.bottom-links::before {
+    color: whitesmoke;
+}
+
+.msg {
+    display: flex;
+    justify-content: center;
+}
+
+.map-container {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    max-width: 600px;
+}
+
+.map-container img {
+    width: 100%;
+
+}
+
+.pointer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.err-msg {
+    display: flex;
+    color: rgb(225, 50, 50);
+    justify-content: center;
+}
+
+.page-header {
+    font-size: 50px;
+    padding: 20px;
+    font-weight: 900;
+    display: flex;
+    justify-content: center;
+}
+
+.page_container {
+    padding: 10px;
+}
+
+.padded-div {
+    padding: 2%;
+    margin: 4%;
+}
+
+.underline {
+    border-bottom-style: solid;
+    border-bottom-color: #3879B6;
+    padding-bottom: 5%;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.padded-top {
+    margin-top: 80px;
+}
+
+.box {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+@media screen and (max-width:600px) {
+    .my_col {
+        width: 100%
+    }
+
+    .explore_col {
+        width: 100%;
+    }
+
+    .three_col {
+        width: 100%;
+    }
+}

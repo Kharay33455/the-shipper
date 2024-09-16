@@ -1,0 +1,118 @@
+{% extends 'base/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% block content %}
+    {% if err %}
+    <script>
+        alert("{{err}}");
+    </script>
+    {% endif %}
+    <div class="my_row2">
+        <div style="padding-left:20%;padding-right: 20%; background-color: white;">
+            <div style="background-color: white;">
+                <a href="{% url 'base:zoom' oti=order.tracking_id zoomie='minus' %}"
+                    class="btn btn-outline-primary">Zoom Out
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-zoom-out" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11M13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0" />
+                        <path
+                            d="M10.344 11.742q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1 6.5 6.5 0 0 1-1.398 1.4z" />
+                        <path fill-rule="evenodd" d="M3 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5" />
+                    </svg>
+                </a>
+
+                <a href="{% url 'base:zoom' oti=order.tracking_id zoomie='plus' %}" class="btn btn-outline-primary"
+                    style="float: inline-end;">Zoom In
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-zoom-in" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11M13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0" />
+                        <path
+                            d="M10.344 11.742q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1 6.5 6.5 0 0 1-1.398 1.4z" />
+                        <path fill-rule="evenodd"
+                            d="M6.5 3a.5.5 0 0 1 .5.5V6h2.5a.5.5 0 0 1 0 1H7v2.5a.5.5 0 0 1-1 0V7H3.5a.5.5 0 0 1 0-1H6V3.5a.5.5 0 0 1 .5-.5" />
+                    </svg></a>
+            </div>
+        </div>
+
+        <div class="my_row2">
+
+            <div class="my_col">
+                <div class="map-container">
+                    <img src="https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/static/{{order.longitude}},{{order.latitude}},{{order.zoom}},0/{{scr_width}}x{{scr_width}}?before_layer=ferry&access_token=pk.eyJ1IjoieXVlMzM0NTUiLCJhIjoiY2x4Y2N0M2dpMDFuZDJpb2tsMXdjMDRwbiJ9.NldjF0fCDx0XCLTXn3hWmg"
+                        alt="">
+                    <div class="spinner-grow text-primary pointer" id="blinker" role="status">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                window.onload= function(){
+                document.getElementById('blinker').style.display = 'block';
+            }
+            </script>
+
+            <div class="my_col">
+                <div style="background-color: white; ">
+           <div class="quotes-form" style="margin-top: 0; margin-bottom: 0; height: 600px;">
+          <h2 style="text-decoration: underline;">
+            Order Details
+          </h2>
+         <br>
+         <h3>
+            Order Number:
+         </h3>
+         <p>
+            <b>
+                {{order.tracking_id}}
+            </b>
+         </p>
+         <hr>
+         <h3>
+            Current Position:
+         </h3>
+         <p>
+            <b>
+                {{order.current_position}}
+            </b>
+         </p>
+<hr>
+         <h3>
+            Expected date of delivery:
+         </h3>
+         <p>
+            <b>
+                {{order.expected_date}}
+            </b>
+         </p>
+         <hr>
+        
+
+           </div>
+            </div>
+            </div>
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+    {% endblock %}
+</body>
+
+</html>
