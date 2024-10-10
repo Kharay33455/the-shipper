@@ -68,7 +68,7 @@
                 </li>
             </ul>
             {% if user.is_authenticated %}
-            <a class="btn btn-outline-secondary my-2 my-sm-0" href="">
+            <a class="btn btn-outline-secondary my-2 my-sm-0" href="{% url 'base:profile' %}">
                 {{request.user.username}}
             </a>
             {% else %}
