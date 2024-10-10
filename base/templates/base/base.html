@@ -95,7 +95,7 @@
             Uncover {{company_name.name}}
         </h1>
 
-        <div class="explore_col">
+        <div class="explore_col" style="padding-left: 50px;">
             <h4 class="explore_header">About Us</h4>
             <ul>
                 <li>
@@ -104,122 +104,42 @@
                     </a>
                 </li>
                 <li>
-                    <a class="bottom-links" href="">
-                        Principles
+                    <a class="bottom-links" href="{% url 'base:new-shipment' %}">
+                        Shipping
                     </a>
                 </li>
 
                 <li>
-                    <a class="bottom-links" href="">
-                        History
-                    </a>
-                </li>
-                <li>
-                    <a class="bottom-links" href="">
-                        Global Impact
+                    <a class="bottom-links" href="{% url 'base:quotes' %}">
+                        Request a quote
                     </a>
                 </li>
 
                 <li>
-                    <a class="bottom-links" href="">
-                        Doing Business With {{company_name.name}}
+                    <a class="bottom-links" href="{% url 'base:tracking' %}">
+                        Tracking
                     </a>
+                </li>
+                <li>
+                    <a class="bottom-links" href="{% url 'base:billing' %}">
+                        Products and Services
+                    </a>
+                </li>
+
+                <li>
+                    {% if request.user.is_authenticated %}
+
+                    <a class="bottom-links" href="{% url 'base:profile' %}">
+                        My {{company_name.name}}
+                    </a>
+                    {% else %}
+                    <a class="bottom-links" href="{% url 'base:login' %}">Get more with {{company_name.name}}</a>
+                    {% endif %}
+
                 </li>
             </ul>
         </div>
-
-        <div class="explore_col">
-            <h4 class="explore_header">Newsroom</h4>
-            <ul>
-                <li>
-                    <a class="bottom-links" href="">
-
-                        Overview
-                    </a>
-                </li>
-
-            </ul>
-        </div>
-
-        <div class="explore_col">
-            <h4 class="explore_header">Insights</h4>
-            <ul>
-
-                <li>
-                    <a class="bottom-links" href="">
-                        Investment Stewardship
-                    </a>
-                </li>
-                <li>
-                    <a class="bottom-links" href="">
-                        Our approach to sustainability
-                    </a>
-                </li>
-                <li>
-                    <a class="bottom-links" href="">
-
-                        Public Policy
-                    </a>
-                </li>
-                <li>
-                    <a class="bottom-links" href="">
-
-                        Long-term capitalism
-                    </a>
-                </li>
-                <li>
-                    <a class="bottom-links" href="">
-                        Disclaimer
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-
-        <div class="explore_col">
-            <h4 class="explore_header">Join Us At {{company_name.name}}</h4>
-            <ul>
-                <li>
-                    <a class="bottom-links" href="">
-                        My Profile
-                    </a>
-                </li>
-                <li>
-                    <a class="bottom-links" href="">
-
-                        Start Investing
-                    </a>
-                </li>
-                <li>
-                    <a class="bottom-links" href="">
-                        My Investments
-                </li>
-                <li>
-                    Earn More With Referrals
-                </li>
-                <li>
-                    Rewards & Benefits
-                </li>
-                <li>
-                    Inclusion & Diversity
-                </li>
-                <li>
-                    Learning and Developments
-                </li>
-                <li>
-                    Meet Our Teams
-                </li>
-                <li>
-                    Supporting Veterans
-                </li>
-                <li>
-                    {{company_name.name}} Alumni Network
-                </li>
-            </ul>
-        </div>
-
     </div>
-
 
 
 </body>

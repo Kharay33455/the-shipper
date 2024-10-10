@@ -231,7 +231,29 @@ def tracking(request):
     return render(request, 'base/tracking.html', context)
 
 def profile(request):
-    company_name = Company_name.objects.first()
+    if request.user.is_authenticated:
 
-    context = {'company_name': company_name}
-    return render(request, 'base/profile.html', context)
+        company_name = Company_name.objects.first()
+        shipper = Shipper.objects.get(user = request.user)
+        orders = Order.objects.filter(shipper = shipper)
+
+        context = {'company_name': company_name, 'orders':orders}
+        return render(request, 'base/profile.html', context)
+    
+    else:
+        return HttpResponseRedirect(reverse('base:login'))
+    
+def pfp(request):
+
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            photo = request.FILES['photo']
+            request.user.shipper.pfp = photo
+            request.user.shipper.save()
+            return HttpResponseRedirect(reverse('base:profile'))
+        else:
+            request.user.shipper.pfp.delete()
+            return HttpResponseRedirect(reverse('base:profile'))
+    else:
+        return HttpResponseRedirect(reverse('base:login'))
+    
