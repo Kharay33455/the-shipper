@@ -223,3 +223,15 @@ def register(request):
 def logout_request(request):
     logout(request)
     return HttpResponseRedirect(reverse('base:base'))
+
+def tracking(request):
+    company_name = Company_name.objects.first()
+
+    context = {'company_name':company_name}
+    return render(request, 'base/tracking.html', context)
+
+def profile(request):
+    company_name = Company_name.objects.first()
+
+    context = {'company_name': company_name}
+    return render(request, 'base/profile.html', context)

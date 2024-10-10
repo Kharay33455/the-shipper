@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
 </head>
 
 <body>
@@ -57,49 +58,106 @@
                 </div>
             </div>
             <script>
-                window.onload= function(){
-                document.getElementById('blinker').style.display = 'block';
-            }
+                window.onload = function () {
+                    document.getElementById('blinker').style.display = 'block';
+                }
             </script>
 
             <div class="my_col">
                 <div style="background-color: white; ">
-           <div class="quotes-form" style="margin-top: 0; margin-bottom: 0; height: 600px;">
-          <h2 style="text-decoration: underline;">
-            Order Details
-          </h2>
-         <br>
-         <h3>
-            Order Number:
-         </h3>
-         <p>
-            <b>
-                {{order.tracking_id}}
-            </b>
-         </p>
-         <hr>
-         <h3>
-            Current Position:
-         </h3>
-         <p>
-            <b>
-                {{order.current_position}}
-            </b>
-         </p>
-<hr>
-         <h3>
-            Expected date of delivery:
-         </h3>
-         <p>
-            <b>
-                {{order.expected_date}}
-            </b>
-         </p>
-         <hr>
-        
+                    <div class="quotes-form" style="margin-top: 0; margin-bottom: 0;">
+                        <h2 style="text-decoration: underline;">
+                            Order Details
+                        </h2>
+                        <br>
+                        <h3>
+                            Order Number:
+                        </h3>
+                        <p>
+                            <b>
+                                {{order.tracking_id}}
+                            </b>
+                        </p>
+                        <hr>
+                        <h4>
+                            Current Position:
+                        </h4>
+                        <p>
+                            <b>
+                                {{order.current_position}}
+                            </b>
+                        </p>
+                        <hr>
+                        <h4>
+                            Expected date of delivery:
+                        </h4>
+                        <p>
+                            <b>
+                                {{order.expected_date}}
+                            </b>
+                        </p>
+                        <hr>
 
-           </div>
-            </div>
+                        <h4>
+                            CARRIER:
+                        </h4>
+                        <p>
+                            <b>
+                                {{order.carrier}}
+                            </b>
+                        </p>
+                        <hr>
+
+                        <h4>
+                            SHIP DATE:
+                        </h4>
+                        <p>
+                            <b>
+                                {{order.ship_date}}
+                            </b>
+                        </p>
+                        <hr>
+
+                        <h4>
+                            SHIPPING SERVICES:
+                        </h4>
+                        <p>
+                            <b>
+                                {{order.shipping_service}}
+                            </b>
+                        </p>
+                        <hr>
+
+                        <h4>
+                            SHIPPED FROM:
+                        </h4>
+                        <p>
+                            <b>
+                                {{order.shipped_from}}
+                            </b>
+                        </p>
+                        <hr>
+
+                        <h4>
+                            SHIPPING COST:
+                        </h4>
+                        <p>
+                            <b>
+                                {{order.shipping_cost}}
+                            </b>
+                        </p>
+                        <hr>
+
+
+
+
+
+
+
+                    </div>
+
+                    
+                </div>
             </div>
 
 
@@ -110,6 +168,10 @@
 
 
     </div>
+
+
+
+
 
 
     {% endblock %}

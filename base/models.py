@@ -17,7 +17,13 @@ class Order(models.Model):
     longitude = models.FloatField()
     zoom = models.FloatField(default=0.0)
     current_position = models.CharField(max_length=40)
-    expected_date = models.CharField(max_length=10)
+    expected_date = models.CharField(max_length=20)
+    carrier = models.CharField(max_length=20)
+    ship_date = models.DateField()
+    shipping_service = models.CharField(max_length=20)
+    shipped_from = models.CharField(max_length=30)
+    shipping_to = models.CharField(max_length=30)
+    shipping_cost = models.FloatField()
 
 
     def __str__(self):

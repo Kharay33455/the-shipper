@@ -81,6 +81,22 @@ body{
 
 }
 
+.profile_page{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 20px;
+    margin: 100px auto 50px;
+    
+}
+
+.profile_col{
+    width: 30%;
+}
+
+.my_row2{
+    height: 100%;
+}
+
 .my_row2::after {
     content: '';
     display: table;

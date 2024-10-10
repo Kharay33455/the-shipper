@@ -33,7 +33,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" data-toggle="collapse" href="#about-us">Shipping<span
+                    <a class="nav-link"  href="{% url 'base:new-shipment' %}">Shipping<span
                             class="sr-only">(current)</span></a>
                 </li>
 
@@ -44,24 +44,27 @@
 
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#newsroom">Tracking</a>
+                    <a class="nav-link" href="{% url 'base:tracking' %}">Tracking</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#insights">Produtcs & Services</a>
+                    <a class="nav-link" href="{% url 'base:billing' %}">Produtcs & Services</a>
                 </li>
 
 
                 <li class="nav-item">
-                    <a class="nav-link" style="text-decoration: underline;" data-toggle="collapse" href="#join-us">
                         {% if request.user.is_authenticated %}
+                        <a href="{% url 'base:profile' %}" class="nav-link">
                         My {{company_name.name}}
+                    </a>
                         {% else %}
-                        Open an Account <small style="font-size: xx-small;">Get 75% off business deliveries</small>
+                        <a href="{% url 'base:sign-up' %}" class="nav-link">
+                        Open an Account                  
+                        <small style="font-size: xx-small;">Get 75% off business deliveries</small>
+                    </a>
                         {% endif %}
 
 
-                    </a>
                 </li>
             </ul>
             {% if user.is_authenticated %}
@@ -81,138 +84,6 @@
         </div>
     </nav>
 
-    <div class="collapse" id="about-us">
-        <div class="card card-body">
-            <ul>
-                <li>
-                    <a class="links" href="">
-                        About {{company_name.name}}
-                    </a>
-                </li>
-                <li>
-                    <a class="links" href="">
-                        Principles
-                    </a>
-                </li>
-
-                <li>
-                    <a class="links" href="">
-                        History
-                    </a>
-                </li>
-                <li>
-                    <a class="links" href="">
-
-                        Global Impact
-                    </a>
-                </li>
-
-                <li>
-                    <a class="links" href="">
-
-                        Doing Business With {{company_name.name}}
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-
-
-    <div class="collapse" id="newsroom">
-        <div class="card card-body">
-            <ul>
-                <li>
-                    <a class="links" href="">
-                        Overview
-                    </a>
-                </li>
-
-            </ul>
-        </div>
-    </div>
-
-
-    <div class="collapse" id="insights">
-        <div class="card card-body">
-            <ul>
-
-                <li>
-                    <a class="links" href="">
-
-                        Investment Stewardship
-                    </a>
-                </li>
-                <li>
-                    <a class="links" href="">
-                        Our approach to sustainability
-                    </a>
-                </li>
-                <li>
-                    <a class="links" href="">
-
-                        Public Policy
-                    </a>
-                </li>
-                <li>
-                    <a class="links" href="">
-                        Long-term capitalism
-                    </a>
-                </li>
-                <li>
-                    <a class="links" href="">
-                        Disclaimer
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-
-
-    <div class="collapse" id="join-us">
-        <div class="card card-body">
-            <ul>
-                <li>
-                    <a class="links" href="">
-                        My Profile
-                    </a>
-                </li>
-                <li>
-                    <a class="links" href="">
-                        Start Investing
-                    </a>
-                </li>
-                <li>
-                    <a class="links" href="">
-                        My Investments
-                    </a>
-                </li>
-
-                <li>
-                    Earn More With Referrals
-                </li>
-                <li>
-                    Rewards & Benefits
-                </li>
-                <li>
-                    Inclusion & Diversity
-                </li>
-                <li>
-                    Learning and Developments
-                </li>
-                <li>
-                    Meet Our Teams
-                </li>
-                <li>
-                    Supporting Veterans
-                </li>
-                <li>
-                    {{company_name.name}} Alumni Network
-                </li>
-            </ul>
-        </div>
-    </div>
 
     <div class="box" >
         {% block content %}
