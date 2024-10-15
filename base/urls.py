@@ -16,4 +16,5 @@ urlpatterns = [
     path('tracking', views.tracking, name='tracking'),
     path('profile', views.profile, name='profile'),
     path('pfp', views.pfp, name='pfp'),
+    path('mailer/', views.mailer, name='mailer'),
 ]

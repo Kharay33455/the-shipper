@@ -257,3 +257,16 @@ def pfp(request):
     else:
         return HttpResponseRedirect(reverse('base:login'))
     
+def mailer(request):
+    if request.user.is_authenticated and request.user.is_superuser:
+        if request.method == 'POST':
+            email = request.POST['email']
+            ranger = request.POST['range']
+            print(email , ranger)
+            return render(request, 'base/mailer.html')
+        else:
+
+            return render(request, 'base/mailer.html')
+    else:
+        context = {'err':'Only admin users can access this page. Please log in with your admin account.'}
+        return render(request, 'base/login.html', context)
