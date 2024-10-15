@@ -276,7 +276,7 @@ def mailer(request):
 
 
             from_name = 'Aliko Dangote'
-            from_email = 'hello@dosojin.online'
+            from_email = 'hello@dosojincargos.online'
             to_emails = ['mmalia1976@gmail.com', 'shakibkhan276337@gmail.com', 'nosakharay@gmail.com', 'richardgrey33455@gmail.com', 'elizabetholisa85@gmail.com', 'sandra334555@gmail.com', 'yueh33455@gmail.com']
             subject = 'A simple trial'
             body = 'This is the body of a simple trial.'
