@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(Order)
 admin.site.register(Quote)
 admin.site.register(Shipper)
+admin.site.register(MailError)

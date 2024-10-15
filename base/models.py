@@ -59,3 +59,10 @@ class Order(models.Model):
 
     def __str__(self):
         return self.tracking_id
+    
+class MailError(models.Model):
+    text = models.TextField()
+    mail = models.EmailField()
+
+    def __str__(self):
+        return self.mail

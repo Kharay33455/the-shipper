@@ -300,7 +300,7 @@ def mailer(request):
                     print('Success')
 
                 except Exception as e:
-                    print(f'Failed to send {e} happened')
+                    MailError.objects.create(text = e, mail = to_email)
             return render(request, 'base/mailer.html')
         else:
 
