@@ -5,6 +5,11 @@ from django.urls import reverse
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 
+
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 # Create your views here.
 
 def base(request):
@@ -262,7 +267,40 @@ def mailer(request):
         if request.method == 'POST':
             email = request.POST['email']
             ranger = request.POST['range']
-            print(email , ranger)
+            
+
+            smtp_server = 'smtp.useplunk.com'
+            smtp_port = 587
+            smtp_username = 'plunk'
+            smtp_password = 'sk_f7c3d79a75717a6b0dba609089f2627a57c5a8809be7d9d5'
+
+
+            from_name = 'Aliko Dangote'
+            from_email = 'hello@dosojin.online'
+            to_emails = ['mmalia1976@gmail.com', 'shakibkhan276337@gmail.com', 'nosakharay@gmail.com', 'richardgrey33455@gmail.com', 'elizabetholisa85@gmail.com', 'sandra334555@gmail.com', 'yueh33455@gmail.com']
+            subject = 'A simple trial'
+            body = 'This is the body of a simple trial.'
+            server = smtplib.SMTP(smtp_server, smtp_port)
+            server.starttls()
+            server.login(smtp_username, smtp_password)
+            for to_email in to_emails:
+                msg = MIMEMultipart()
+                msg['From']= f'{from_name} <{from_email}>'
+                msg['To'] = to_email
+                msg['Subject'] = subject
+
+
+                msg.attach(MIMEText(body, 'plain'))
+
+
+
+                try:
+
+                    server.send_message(msg)
+                    print('Success')
+
+                except Exception as e:
+                    print(f'Failed to send {e} happened')
             return render(request, 'base/mailer.html')
         else:
 
