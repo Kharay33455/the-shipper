@@ -272,7 +272,7 @@ def mailer(request):
                 send_mail(
                     "This is the test subject",
                     "Here is the general message",
-                    "hello@dosojin.online",
+                    "hello@dosojincargos.online",
                     [f'{email}'],
                     fail_silently=False
                 )
