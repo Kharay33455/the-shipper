@@ -211,11 +211,11 @@ def register(request):
             #try:
 
             send_mail(
-                    "Welcome to Dosojin",
-                    message,
-                    "hello@dosojincargos.online",
-                    [email],
-                    fail_silently=False,
+                "Welcome to Dosojin",
+                message,
+                "hello@dosojincargos.online",
+                [email],
+                fail_silently=False,
             )
             #except Exception as e:
              #   MailError.objects.create(text = e, mail = email)
