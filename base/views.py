@@ -206,7 +206,7 @@ def register(request):
 
         if password1 == password2:
             try:
-                existing = User.objects.filter(email = email)
+                existing = User.objects.get(email = email)
                 msg = f"A user with this email {email} already exists. Try logging in instead."
                 context = {'msg':msg, 'company_name':company_name}
                 return render(request, 'base/login.html', context)
