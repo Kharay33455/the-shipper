@@ -42,14 +42,20 @@
             </div>
         </div>
         <hr>
-        <p style="border: solid; border-style: dotted; padding: 2%; border-color: black;">Account
-            Details</p>
+        <p style="font-family:Helvetica, Arial, sans-serif;">
+            <b>
+            Account
+            Details
+        </b>
+    </p>
         <hr>
-        <p style="border: solid; border-style: dotted; padding: 2%; border-color: black;">
-            {{ request.user.first_name }} {{ request.user.last_name }}<br><br>
-            Email: {{request.user.email}} <br>
-            0 shipment(s) delivered. <br>
-            0 shipment(s) in transit.
+        <p style="font-family: Arial, Helvetica, sans-serif;">
+            <b>
+            {{ request.user.first_name }} {{ request.user.last_name }}
+        </b><br><br>
+            Email: <i> {{request.user.email}} </i><br>
+           <i>0 shipment(s) delivered.</i><br>
+           <i>0 shipment(s) in transit.</i>
         </p>
     </div>
 </div>
