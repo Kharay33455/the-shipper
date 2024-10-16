@@ -33,10 +33,24 @@ class Shipper(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
     pfp = models.ImageField(upload_to='pfp/', blank=True, null=True)
+    location =models.CharField(max_length=30)
 
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+    
+class Receiver(models.Model):
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
+    address_line = models.TextField()
+    address_line2 = models.TextField(blank=True, null=True)
+    city_and_zip_code = models.TextField()
+    phone_number = models.CharField(max_length=20)
+    email = models.EmailField()
+
+    def __str__(self):
+        return f'Receiver {self.first_name} {self.last_name}'
+    
     
 
 """Class to track model"""
@@ -55,6 +69,18 @@ class Order(models.Model):
     shipping_to = models.CharField(max_length=30)
     shipping_cost = models.FloatField()
     shipper = models.ForeignKey(Shipper, on_delete=models.CASCADE)
+    receiver = models.ForeignKey(Receiver, on_delete=models.CASCADE)
+    on_hold = models.BooleanField(default=False)
+    comment = models.TextField()
+    qty = models.CharField(max_length=10)
+    piece_type = models.CharField(max_length=20)
+    description = models.TextField()
+    length = models.CharField(max_length=10)
+    width = models.CharField(max_length=10)
+    height = models.CharField(max_length=10)
+    weight = models.CharField(max_length=10)
+    
+
 
 
     def __str__(self):
