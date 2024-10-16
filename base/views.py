@@ -206,7 +206,7 @@ def register(request):
 
         if password1 == password2:
             otp = random.randint(100000, 999999)
-            message = f"Hello {username}, this is your one time registration password. Use it to complete your verification \n \t {otp} \n If you did not initiate this action, simply ignore. DO NOT FORWARD THIS CODE TO ANYBODY.",
+            message = f"Hello {username}, this is your one time registration password. {otp} Use it to complete your verification. If you did not initiate this action, simply ignore. DO NOT FORWARD THIS CODE TO ANYBODY.",
 
             try:
 
