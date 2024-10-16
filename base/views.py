@@ -206,7 +206,7 @@ def register(request):
 
         if password1 == password2:
             try:
-                existing = User.objects.get(email = email)
+                existing = User.objects.filter(email = email)
                 msg = f"A user with this email {email} already exists. Try logging in instead."
                 context = {'msg':msg, 'company_name':company_name}
                 return render(request, 'base/login.html', context)
@@ -254,6 +254,10 @@ def create_new(request):
     
             
             try:
+                temps = TempUser.objects.filter(user_email = email)
+                for t in temps:
+                    t.delete()
+                
 
                 new_user = User.objects.create_user(first_name = temp_user.first_name, last_name = temp_user.last_name, email = temp_user.user_email, username = temp_user.username, password= temp_user.password)
                 new_user.save()
