@@ -18,7 +18,7 @@
     </script>
     {% endif %}
     <div class="my_row2">
-        <div style="padding-left:20%;padding-right: 20%; background-color: white;">
+        <div style="padding-left:10%;padding-right: 10%; background-color: white;">
             <div style="background-color: white;">
                 <a href="{% url 'base:zoom' oti=order.tracking_id zoomie='minus' %}"
                     class="btn btn-outline-primary">Zoom Out
@@ -64,8 +64,10 @@
             </script>
 
             <div class="my_col">
+
                 <div style="background-color: white; ">
-                    <div class="quotes-form" style="margin-top: 0; margin-bottom: 0;">
+                    <div class="quotes-form"
+                        style="margin-top: 0; margin-bottom: 0; background-color: rgb(200, 200, 200); border-radius: 1%;">
                         <h2 style="text-decoration: underline;">
                             Order Details
                         </h2>
@@ -147,6 +149,38 @@
                             </b>
                         </p>
                         <hr>
+                        <div style="position: relative; margin-right:15% ; padding-bottom: 30px;">
+                            <div class="dot ">
+                                <span style="color: white;">1</span> <br>
+                                <p class="stats">Paid</p>
+                            </div>
+                            <div class="dot two">
+                                <span style="color: white;">2</span> <br>
+                                <p class="stats">Shipped</p>
+                            </div>
+                            <div class="dot three">
+                                <span style="color: gray;">3</span> <br>
+                                <p class="stats">Delivered</p>
+                            </div>
+                            <div class="dot four">
+                                <span style="color: gray;">4</span> <br>
+                                <p class="stats">Fulfilled</p>
+                            </div>
+
+
+                            <progress value="34" max="100" style="width: 100%; position: absolute; top: -5%; left: 2%; ">
+
+                            </progress>
+<p style="padding-top: 50px;">
+    <i>
+                            Your item arrived at our {{company_name.name}} facility in {{order.shipped_from}} on {{order.ship_date}}.
+                            The item is currently in transit on our {{company_name.name}} {{order.shipping_service}} carrier to {{order.shipping_to}}. Here is your tracking code: <span style="text-decoration: underline;">{{order.tracking_id}}</span>
+                        </i>
+                        </p>
+                        </div>
+
+
+
 
 
 
@@ -156,7 +190,7 @@
 
                     </div>
 
-                    
+
                 </div>
             </div>
 
