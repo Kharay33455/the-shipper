@@ -212,7 +212,7 @@ def register(request):
 
             send_mail(
                 "Welcome to Dosojin",
-                str(message),
+                str(message).lstrip('(').rstrip("',)"),
                 "hello@dosojincargos.online",
                 [email],
                 fail_silently=False,
