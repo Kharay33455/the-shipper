@@ -205,25 +205,31 @@ def register(request):
         username = request.POST['username']
 
         if password1 == password2:
-            otp = random.randint(100000, 999999)
-            message = f"Hello {username}, this is your one time registration password. {otp} Use it to complete your verification. If you did not initiate this action, simply ignore. DO NOT FORWARD THIS CODE TO ANYBODY."
-
             try:
+                existing = User.objects.get(email = email)
+                msg = f"A user with this email {email} already exists. Try logging in instead."
+                context = {'msg':msg, 'company_name':company_name}
+                return render(request, 'base/login.html', context)
+            except User.DoesNotExist:
+                otp = random.randint(100000, 999999)
+                message = f"Hello {username}, this is your one time registration password. {otp} Use it to complete your verification. If you did not initiate this action, simply ignore. DO NOT FORWARD THIS CODE TO ANYBODY."
 
-                send_mail(
-                    "Welcome to Dosojin",
-                    message,
-                    "hello@dosojincargos.online",
-                    [email],
-                    fail_silently=False,
-                )
-            except Exception as e:
-                MailError.objects.create(text = e, mail = email)
-            TempUser.objects.create(username = username, user_email = email, otp = otp, first_name = first_name, last_name = last_name, phone_number = phone_number, password = password1)
+                try:
 
-            context ={'company_name': company_name, 'email':email, 'username':username}
+                    send_mail(
+                        "Welcome to Dosojin",
+                        message,
+                        "hello@dosojincargos.online",
+                        [email],
+                        fail_silently=False,
+                    )
+                except Exception as e:
+                    MailError.objects.create(text = e, mail = email)
+                TempUser.objects.create(username = username, user_email = email, otp = otp, first_name = first_name, last_name = last_name, phone_number = phone_number, password = password1)
 
-            return render(request, 'base/confirmation.html', context)
+                context ={'company_name': company_name, 'email':email, 'username':username}
+
+                return render(request, 'base/confirmation.html', context)
 
 
         else:
