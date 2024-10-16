@@ -212,7 +212,7 @@ def register(request):
                 return render(request, 'base/login.html', context)
             except User.DoesNotExist:
                 otp = random.randint(100000, 999999)
-                message = f"Hello {username}, this is your one time registration password. {otp} Use it to complete your verification. If you did not initiate this action, simply ignore. DO NOT FORWARD THIS CODE TO ANYBODY."
+                message = f"Hello {username}, this is your one time registration password. {otp} Use it to complete your email verification and activate your {company_name.name} account. If you did not initiate this action, simply ignore. DO NOT FORWARD THIS CODE TO ANYBODY."
 
                 try:
 
