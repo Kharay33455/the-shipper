@@ -6,6 +6,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from django.core.mail import send_mail
 
+import random
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -204,16 +205,26 @@ def register(request):
         username = request.POST['username']
 
         if password1 == password2:
+            otp = random.randint(100000, 999999)
+            message = f"Hello {username}, this is your one time registration password. Use it to complete your verification \n \t {otp} \n If you did not initiate this action, simply ignore. DO NOT FORWARD THIS CODE TO ANYBODY.",
+
             try:
 
-                new_user = User.objects.create_user(first_name = first_name, last_name = last_name, email = email, username = username, password= password1)
-                new_user.save()
-                Shipper.objects.create(first_name = first_name, last_name = last_name, user = new_user, phone_number = phone_number)
-                login(request, new_user)
-                return HttpResponseRedirect(reverse('base:base'))
-            except(IntegrityError):
-                context = {'msg': 'A user with this username already exists. Log in instead?', 'company_name': company_name}
-                return render(request, 'base/signup.html', context)
+                send_mail(
+                    "Welcome to Dosojin",
+                    message,
+                    "hello@dosojincargos.online",
+                    [email],
+                    fail_silently=False
+                )
+            except Exception as e:
+                MailError.objects.create(text = e, mail = email)
+            TempUser.objects.create(username = username, user_email = email, otp = otp, first_name = first_name, last_name = last_name, phone_number = phone_number, password = password1)
+
+            context ={'company_name': company_name, 'email':email, 'username':username}
+
+            return render(request, 'base/confirmation.html', context)
+
 
         else:
             company_name = Company_name.objects.first()
@@ -224,6 +235,33 @@ def register(request):
         company_name = Company_name.objects.first()
         context  ={'company_name': company_name}
         return render(request, 'base/signup.html', context)
+def create_new(request):
+    company_name = Company_name.objects.first()
+    if request.method == 'POST':
+
+        email = request.POST['email']
+        otp = request.POST['otp']
+        temp_user = TempUser.objects.filter(user_email = email).last()
+        if otp == temp_user.otp:
+            
+
+    
+            
+            try:
+
+                new_user = User.objects.create_user(first_name = temp_user.first_name, last_name = temp_user.last_name, email = temp_user.user_email, username = temp_user.username, password= temp_user.password)
+                new_user.save()
+                Shipper.objects.create(first_name = temp_user.first_name, last_name = temp_user.last_name, user = new_user, phone_number = temp_user.phone_number)
+                login(request, new_user)
+                return HttpResponseRedirect(reverse('base:base'))
+            except(IntegrityError):
+                context = {'msg': 'A user with this username already exists. Log in instead?', 'company_name': company_name}
+                return render(request, 'base/signup.html', context)
+        else:
+            context = {'invalid':"Your otp is invalid", 'email':email}
+            return render(request, 'base/confirmation.html', context )
+                
+
     
 def logout_request(request):
     logout(request)

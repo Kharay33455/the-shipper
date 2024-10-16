@@ -66,3 +66,16 @@ class MailError(models.Model):
 
     def __str__(self):
         return self.mail
+    
+class TempUser(models.Model):
+    user_email = models.EmailField()
+    username = models.CharField(max_length=20)
+    otp = models.CharField(max_length=7)
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=20)
+    password = models.CharField(max_length=30)
+    
+
+    def __str__(self):
+        return f'{self.otp} for {self.username}'
