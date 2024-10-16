@@ -268,7 +268,7 @@ def create_new(request):
                 context = {'msg': 'A user with this username already exists. Log in instead?', 'company_name': company_name}
                 return render(request, 'base/signup.html', context)
         else:
-            context = {'invalid':"Your otp is invalid", 'email':email}
+            context = {'invalid':"Your otp is invalid", 'email':email, 'company_name':company_name}
             return render(request, 'base/confirmation.html', context )
                 
 
