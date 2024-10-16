@@ -208,17 +208,17 @@ def register(request):
             otp = random.randint(100000, 999999)
             message = f"Hello {username}, this is your one time registration password. {otp} Use it to complete your verification. If you did not initiate this action, simply ignore. DO NOT FORWARD THIS CODE TO ANYBODY.",
 
-            try:
+            #try:
 
-                send_mail(
+            send_mail(
                     "Welcome to Dosojin",
                     message,
                     "hello@dosojincargos.online",
                     [email],
                     fail_silently=False
-                )
-            except Exception as e:
-                MailError.objects.create(text = e, mail = email)
+            )
+            #except Exception as e:
+             #   MailError.objects.create(text = e, mail = email)
             TempUser.objects.create(username = username, user_email = email, otp = otp, first_name = first_name, last_name = last_name, phone_number = phone_number, password = password1)
 
             context ={'company_name': company_name, 'email':email, 'username':username}
