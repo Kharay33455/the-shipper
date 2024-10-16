@@ -206,7 +206,7 @@ def register(request):
 
         if password1 == password2:
             otp = random.randint(100000, 999999)
-            message = f"Hello {username}, this is your one time registration password. {otp} Use it to complete your verification. If you did not initiate this action, simply ignore. DO NOT FORWARD THIS CODE TO ANYBODY.",
+            message = "Hello {email}, this is your one time registration password. {otp} Use it to complete your verification. If you did not initiate this action, simply ignore. DO NOT FORWARD THIS CODE TO ANYBODY.",
 
             #try:
 
@@ -215,7 +215,7 @@ def register(request):
                     message,
                     "hello@dosojincargos.online",
                     [email],
-                    fail_silently=False
+                    fail_silently=False,
             )
             #except Exception as e:
              #   MailError.objects.create(text = e, mail = email)
