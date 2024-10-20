@@ -307,7 +307,9 @@
                         document.getElementsByClassName('shipping')[0].style.display='none';
                         document.getElementsByClassName('explore')[0].style.display = 'none';
                         document.getElementById('print').style.display = 'none';
+                        document.getElementById('remark').style.display = 'none';
                         window.print();
+                        location.reload();
                     }
 
                     </script>
@@ -521,7 +523,7 @@
     </div>
 </div>
 
-<div >
+<div id="remark" >
     <b>REMARK:</b> {{order.comment}}
 </div>
 
