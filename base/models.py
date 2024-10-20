@@ -8,15 +8,8 @@ class Countries(models.Model):
     
     def __str__(self):
         return self.name
-###    
-#   name = models.CharField(max_length=15)
-#    color_r = models.CharField(max_length=3)
-#    color_b = models.CharField(max_length=3)
-#    color_g = models.CharField(max_length=3)
 
- #   def __str__(self):
-  #      return self.name
-    
+
 class Quote(models.Model):
     ship_from = models.CharField(max_length=50)
     ship_to = models.CharField(max_length=50)
