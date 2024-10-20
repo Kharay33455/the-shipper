@@ -8,6 +8,14 @@ class Countries(models.Model):
     
     def __str__(self):
         return self.name
+###    
+#   name = models.CharField(max_length=15)
+#    color_r = models.CharField(max_length=3)
+#    color_b = models.CharField(max_length=3)
+#    color_g = models.CharField(max_length=3)
+
+ #   def __str__(self):
+  #      return self.name
     
 class Quote(models.Model):
     ship_from = models.CharField(max_length=50)
@@ -51,10 +59,21 @@ class Receiver(models.Model):
     def __str__(self):
         return f'Receiver {self.first_name} {self.last_name}'
     
-    
+ORDER_STATUS = [
+   ('PE', 'Pending'),
+    ('PU', 'Picked up'),
+    ('OH', 'On Hold'),
+    ('OD', 'Out for delivery'),
+    ('IT', 'In-Transit'),
+    ('EN', 'Enroute'),
+    ('CA', 'Cancelled'),
+    ('DE', 'Delivered'),
+    ('RE', 'Returned'),
+]    
 
 """Class to track model"""
 class Order(models.Model):
+
     tracking_id = models.CharField(max_length=10)
     screen_width = models.IntegerField(blank=True, null=True)
     latitude = models.FloatField()
@@ -79,12 +98,15 @@ class Order(models.Model):
     width = models.CharField(max_length=10)
     height = models.CharField(max_length=10)
     weight = models.CharField(max_length=10)
-    
+    status =  models.CharField(max_length=2, choices=ORDER_STATUS, default='PE')
 
 
 
     def __str__(self):
         return self.tracking_id
+
+    def get_status(self):
+        return dict(ORDER_STATUS).get(self.status, 'Unknown')
     
 class MailError(models.Model):
     text = models.TextField()

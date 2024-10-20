@@ -7,6 +7,7 @@
     alert("{{err}}");
 </script>
 {% endif %}
+
 <div class="my_row2">
     <div style="padding-left:10%;padding-right: 10%; background-color: white;">
         <div style="background-color: white;">
@@ -153,14 +154,32 @@
                     <div class="status">
                         <b>
                             SHIPMENT STATUS:
-                            {% if order.on_hold %}
-                            <span style="color: red; font-weight: 900;">ON
-                                HOLD</span>
-                            {% else %}
-                            <span style="color: green; font-weight: 900;">IN TRANSIT</span>
+                            {% if order.get_status == 'Pending' %}
+                            <span style="color: orange; font-weight: 900;">PENDING</span>
+                            {% elif order.get_status == 'Picked up' %}
+                            <span style="color: greenyellow; font-weight: 900;">PICKED UP</span>
+                            {% elif order.get_status == 'On Hold' %}
+                            <span style="color: red; font-weight: 900;">ON-HOLD</span>
+                            {% elif order.get_status == 'Out for delivery' %}
+                            <span style="color: green; font-weight: 900;">OUT FOR DELIVERY</span>
+                            {% elif order.get_status == 'In-Transit' %}
+                            <span style="color: green; font-weight: 900;">IN-TRANSIT</span>
+                            {% elif order.get_status == 'Enroute' %}
+                            <span style="color: green; font-weight: 900;">ENROUTE</span>
+                            {% elif order.get_status == 'Cancelled' %}
+                            <span style="color: red; font-weight: 900;">CANCELLED</span>
+                            {% elif order.get_status == 'Delivered' %}
+                            <span style="color: gold; font-weight: 900;">DELIVERED</span>
+                            {% elif order.get_status == 'Returned' %}
+                            <span style="color: Purple; font-weight: 900;">RETURNED</span>
                             {% endif %}
+
+                     
                         </b>
                     </div>
+
+
+                    <!--
                     <div style="position: relative; margin-right:15% ; padding-bottom: 30px; margin-top:50px;">
                         <div class="dot ">
                             <span style="color: white;">1</span> <br>
@@ -178,8 +197,9 @@
                             <span style="color: gray;">4</span> <br>
                             <p class="stats">Fulfilled</p>
                         </div>
+                        -->
 
-
+<!---
 
                         {% if order.on_hold %}
                         <div class="progress_bar">
@@ -194,6 +214,7 @@
                         </progress>
 
                         {% endif %}
+                        -->
                         <div style="padding-top: 50px;">
 
 
