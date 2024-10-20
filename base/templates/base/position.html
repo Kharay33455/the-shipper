@@ -9,7 +9,7 @@
 {% endif %}
 
 <div class="my_row2">
-    <div style="padding-left:10%;padding-right: 10%; background-color: white;">
+    <div style="padding-left:10%;padding-right: 10%; background-color: white;" id="zoom">
         <div style="background-color: white;">
             <a href="{% url 'base:zoom' oti=order.tracking_id zoomie='minus' %}" class="btn btn-outline-primary">Zoom
                 Out
@@ -177,6 +177,140 @@
                      
                         </b>
                     </div>
+                    <div id="print">
+                    <button onclick="printer()" >
+                        Print
+                    </button>
+                </div>
+                    <script>
+                        function printer(){
+                        console.log('Scaling body')
+                        document.getElementsByClassName('map-container')[0].innerHTML = `
+                            <div>
+        <h4 class="information">
+            Package(s)
+        </h4>
+        <div class="packages">
+            <div>
+                QTY
+                <hr>Piece Type
+                <hr>Description
+                <hr>Length(cm)
+                <hr>Width(cm)
+                <hr>Height(cm)
+                <hr> Weight(kg)
+            </div>
+            <div>
+                {{order.qty}}
+                <hr> {{order.piece_type}}
+                <hr>
+                <div class="my_overflow">{{order.description}}</div>
+                <hr>{{order.length}}
+                <hr>{{order.width}}
+                <hr>{{order.height}}
+                <hr>{{order.weight}}
+            </div>
+        </div>
+
+
+    </div>
+                          <div>
+        <div>
+            <h3 class="information">
+                Shipper Information
+            </h3>
+            <div>
+                {{order.shipper.first_name}} {{order.shipper.last_name}}
+            </div>
+            <div>
+                {{order.shipper.location}}
+            </div>
+            <br>
+            <div>
+                <b>
+                    Contact information:
+                </b>
+            </div>
+            <div>
+                {{order.shipper.user.email}}
+            </div>
+            <div>
+                {{order.shipper.phone_number}}
+            </div>
+        </div>
+        <br>
+        <div>
+            <h3 class="information">
+                Receiver Information
+            </h3>
+            <div>
+                {{order.receiver.first_name}} {{order.receiver.last_name}}
+            </div>
+            <div>
+                {{order.receiver.address_line}}
+            </div>
+            {% if order.receiver.address_line2 %}
+            <div>
+                {{order.receiver.address_line2}}
+            </div>
+            {% endif %}
+            <div>
+                {{order.receiver.phone_number}}
+            </div>
+            <div>
+                {{order.receiver.email}}
+            </div>
+        </div>
+    </div>
+                        <div>
+        <h3 class="information">
+            Shipment Update
+        </h3>
+        <div class="packages">
+            <div>
+               Location <hr>Status <hr>Updated by
+            </div>
+
+            <div>
+
+            <div style="text-transform: uppercase;" class="my_overflow"> {{order.current_position}} </div><hr> 
+            {% if order.get_status == 'Pending' %}
+            <span style="color: orange; font-weight: 900;">PENDING</span>
+            {% elif order.get_status == 'Picked up' %}
+            <span style="color: greenyellow; font-weight: 900;">PICKED UP</span>
+            {% elif order.get_status == 'On Hold' %}
+            <span style="color: red; font-weight: 900;">ON-HOLD</span>
+            {% elif order.get_status == 'Out for delivery' %}
+            <span style="color: green; font-weight: 900;">OUT FOR DELIVERY</span>
+            {% elif order.get_status == 'In-Transit' %}
+            <span style="color: green; font-weight: 900;">IN-TRANSIT</span>
+            {% elif order.get_status == 'Enroute' %}
+            <span style="color: green; font-weight: 900;">ENROUTE</span>
+            {% elif order.get_status == 'Cancelled' %}
+            <span style="color: red; font-weight: 900;">CANCELLED</span>
+            {% elif order.get_status == 'Delivered' %}
+            <span style="color: gold; font-weight: 900;">DELIVERED</span>
+            {% elif order.get_status == 'Returned' %}
+            <span style="color: Purple; font-weight: 900;">RETURNED</span>
+            {% endif %}
+     
+             <hr>
+            {{company_name.name}} admin
+
+
+            </div>
+        </div>
+     
+    </div>`
+        document.getElementById('zoom').style.display = 'none';
+                        console.log('success');
+                        document.getElementsByClassName('shipping')[0].style.display='none';
+                        document.getElementsByClassName('explore')[0].style.display = 'none';
+                        document.getElementById('print').style.display = 'none';
+                        window.print();
+                    }
+
+                    </script>
 
 
                     <!--
