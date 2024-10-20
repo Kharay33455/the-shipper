@@ -357,11 +357,27 @@
             <div>
 
             <div id="date">date</div> <hr> <div id="time">time</div> <hr><div style="text-transform: uppercase;" class="my_overflow"> {{order.current_position}} </div><hr> 
-            {% if order.on_hold %}
-            <div style="color: red;">ON HOLD</div>
-            {% else %}
-            <div style="color: green;">IN TRANSIT</div>
-            {% endif %} <hr>
+            {% if order.get_status == 'Pending' %}
+            <span style="color: orange; font-weight: 900;">PENDING</span>
+            {% elif order.get_status == 'Picked up' %}
+            <span style="color: greenyellow; font-weight: 900;">PICKED UP</span>
+            {% elif order.get_status == 'On Hold' %}
+            <span style="color: red; font-weight: 900;">ON-HOLD</span>
+            {% elif order.get_status == 'Out for delivery' %}
+            <span style="color: green; font-weight: 900;">OUT FOR DELIVERY</span>
+            {% elif order.get_status == 'In-Transit' %}
+            <span style="color: green; font-weight: 900;">IN-TRANSIT</span>
+            {% elif order.get_status == 'Enroute' %}
+            <span style="color: green; font-weight: 900;">ENROUTE</span>
+            {% elif order.get_status == 'Cancelled' %}
+            <span style="color: red; font-weight: 900;">CANCELLED</span>
+            {% elif order.get_status == 'Delivered' %}
+            <span style="color: gold; font-weight: 900;">DELIVERED</span>
+            {% elif order.get_status == 'Returned' %}
+            <span style="color: Purple; font-weight: 900;">RETURNED</span>
+            {% endif %}
+     
+             <hr>
             {{company_name.name}} admin
 
 
