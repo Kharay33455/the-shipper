@@ -8,7 +8,11 @@
 </script>
 {% endif %}
 
-<div class="my_row2">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+<div class="my_row2" id="print-body">
     <div style="padding-left:10%;padding-right: 10%; background-color: white;" id="zoom">
         <div style="background-color: white;">
             <a href="{% url 'base:zoom' oti=order.tracking_id zoomie='minus' %}" class="btn btn-outline-primary">Zoom
@@ -131,7 +135,7 @@
                     </p>
                     <hr>
 
-                    
+
                     <h4>
                         PARCEL DESCRIPTION:
                     </h4>
@@ -174,18 +178,17 @@
                             <span style="color: Purple; font-weight: 900;">RETURNED</span>
                             {% endif %}
 
-                     
+
                         </b>
                     </div>
                     <div id="print">
-                    <button class="btn btn-outline-primary" onclick="printer()" >
-                        Generate Invoice
-                    </button>
-                </div>
+                        <button class="btn btn-outline-primary" onclick="printer()">
+                            Generate Invoice
+                        </button>
+                    </div>
                     <script>
-                        function printer(){
-                        console.log('Scaling body')
-                        document.getElementsByClassName('map-container')[0].innerHTML = `
+                        function printer() {
+                            document.getElementsByClassName('map-container')[0].innerHTML = `
                             <div>
         <h4 class="information">
             Package(s)
@@ -302,14 +305,27 @@
         </div>
      
     </div>`
-        document.getElementById('zoom').style.display = 'none';
-                        console.log('success');
-                        document.getElementsByClassName('shipping')[0].style.display='none';
-                        document.getElementsByClassName('explore')[0].style.display = 'none';
-                        document.getElementById('print').style.display = 'none';
-                        document.getElementsByClassName('my_row2')[0].style.height = '90vh';
-                        window.print();
-                    }
+                            document.getElementById('zoom').style.display = 'none';
+                            document.getElementsByClassName('shipping')[0].style.display = 'none';
+                            document.getElementsByClassName('explore')[0].style.display = 'none';
+                            document.getElementById('print').style.display = 'none';
+                            document.getElementById('remark').style.display = 'none';
+                            document.getElementById("print-body").style.padding = '30px';
+                            const { jsPDF } = window.jspdf;
+
+                            // Use html2canvas to take a screenshot of the content
+                            html2canvas(document.querySelector("#print-body")).then(canvas => {
+                                const imgData = canvas.toDataURL("image/png");
+                                console.log('success');
+
+                                const pdf = new jsPDF();
+
+                                // Add image to PDF and save
+                                pdf.addImage(imgData, 'PNG',0, 0, 200, 282);
+                                pdf.save("document.pdf");
+                            });
+
+                        };
 
                     </script>
 
@@ -334,7 +350,7 @@
                         </div>
                         -->
 
-<!---
+                    <!---
 
                         {% if order.on_hold %}
                         <div class="progress_bar">
@@ -350,49 +366,49 @@
 
                         {% endif %}
                         -->
-                        <div style="padding-top: 50px;">
+                    <div style="padding-top: 50px;">
 
 
-                            {% if order.comment %}
-                            <b>
-                                {{order.comment}}
-                            </b> <br>
+                        {% if order.comment %}
+                        <b>
+                            {{order.comment}}
+                        </b> <br>
 
-                            {% endif %}
+                        {% endif %}
 
-                            <p>
-                                <i>
-                                    Your item arrived at our {{company_name.name}} facility in {{order.shipped_from}} on
-                                    {{order.ship_date}}.
-                                    The item is currently in transit on our {{company_name.name}}
-                                    {{order.shipping_service}}
-                                    carrier to {{order.shipping_to}}. Here is your tracking code: <span
-                                        style="text-decoration: underline;">{{order.tracking_id}}</span>
-                                </i>
-                            </p>
-                        </div>
+                        <p>
+                            <i>
+                                Your item arrived at our {{company_name.name}} facility in {{order.shipped_from}} on
+                                {{order.ship_date}}.
+                                The item is currently in transit on our {{company_name.name}}
+                                {{order.shipping_service}}
+                                carrier to {{order.shipping_to}}. Here is your tracking code: <span
+                                    style="text-decoration: underline;">{{order.tracking_id}}</span>
+                            </i>
+                        </p>
                     </div>
-
-
-
-
-
-
-
-
-
-
                 </div>
 
 
+
+
+
+
+
+
+
+
             </div>
+
+
         </div>
-
-
-
-
-
     </div>
+
+
+
+
+
+</div>
 
 
 </div>
@@ -486,52 +502,61 @@
         </h3>
         <div class="packages">
             <div>
-                Date <hr>Time <hr>Location <hr>Status <hr>Updated by
+                Date
+                <hr>Time
+                <hr>Location
+                <hr>Status
+                <hr>Updated by
             </div>
 
             <div>
 
-            <div id="date">date</div> <hr> <div id="time">time</div> <hr><div style="text-transform: uppercase;" class="my_overflow"> {{order.current_position}} </div><hr> 
-            {% if order.get_status == 'Pending' %}
-            <span style="color: orange; font-weight: 900;">PENDING</span>
-            {% elif order.get_status == 'Picked up' %}
-            <span style="color: greenyellow; font-weight: 900;">PICKED UP</span>
-            {% elif order.get_status == 'On Hold' %}
-            <span style="color: red; font-weight: 900;">ON-HOLD</span>
-            {% elif order.get_status == 'Out for delivery' %}
-            <span style="color: green; font-weight: 900;">OUT FOR DELIVERY</span>
-            {% elif order.get_status == 'In-Transit' %}
-            <span style="color: green; font-weight: 900;">IN-TRANSIT</span>
-            {% elif order.get_status == 'Enroute' %}
-            <span style="color: green; font-weight: 900;">ENROUTE</span>
-            {% elif order.get_status == 'Cancelled' %}
-            <span style="color: red; font-weight: 900;">CANCELLED</span>
-            {% elif order.get_status == 'Delivered' %}
-            <span style="color: gold; font-weight: 900;">DELIVERED</span>
-            {% elif order.get_status == 'Returned' %}
-            <span style="color: Purple; font-weight: 900;">RETURNED</span>
-            {% endif %}
-     
-             <hr>
-            {{company_name.name}} admin
+                <div id="date">date</div>
+                <hr>
+                <div id="time">time</div>
+                <hr>
+                <div style="text-transform: uppercase;" class="my_overflow"> {{order.current_position}} </div>
+                <hr>
+                {% if order.get_status == 'Pending' %}
+                <span style="color: orange; font-weight: 900;">PENDING</span>
+                {% elif order.get_status == 'Picked up' %}
+                <span style="color: greenyellow; font-weight: 900;">PICKED UP</span>
+                {% elif order.get_status == 'On Hold' %}
+                <span style="color: red; font-weight: 900;">ON-HOLD</span>
+                {% elif order.get_status == 'Out for delivery' %}
+                <span style="color: green; font-weight: 900;">OUT FOR DELIVERY</span>
+                {% elif order.get_status == 'In-Transit' %}
+                <span style="color: green; font-weight: 900;">IN-TRANSIT</span>
+                {% elif order.get_status == 'Enroute' %}
+                <span style="color: green; font-weight: 900;">ENROUTE</span>
+                {% elif order.get_status == 'Cancelled' %}
+                <span style="color: red; font-weight: 900;">CANCELLED</span>
+                {% elif order.get_status == 'Delivered' %}
+                <span style="color: gold; font-weight: 900;">DELIVERED</span>
+                {% elif order.get_status == 'Returned' %}
+                <span style="color: Purple; font-weight: 900;">RETURNED</span>
+                {% endif %}
+
+                <hr>
+                {{company_name.name}} admin
 
 
             </div>
         </div>
-     
+
     </div>
 </div>
 
-<div >
+<div id="remark">
     <b>REMARK:</b> {{order.comment}}
 </div>
 
 <script>
-let dateObject = new Date();
-let date = dateObject.toLocaleDateString();
-let time = dateObject.toLocaleTimeString();
-document.getElementById('date').innerHTML = date;
-document.getElementById('time').innerHTML = time;
+    let dateObject = new Date();
+    let date = dateObject.toLocaleDateString();
+    let time = dateObject.toLocaleTimeString();
+    document.getElementById('date').innerHTML = date;
+    document.getElementById('time').innerHTML = time;
 
 </script>
 
