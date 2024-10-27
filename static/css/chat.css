@@ -9,8 +9,15 @@
     margin-left: -20px;
     margin-right: -20px;
     color: white;
+
+}
+.unset-warp{
+    white-space:unset !important;
+    overflow-x: unset !important ;
+    text-overflow: unset !important;
 }
 .form{
+    z-index: -1;
     margin-left: 50px;
     margin-top: -50px;
     background-color: white;
@@ -19,6 +26,9 @@
     max-width: 900px;
     margin-right: 50px;
     padding: 5px;
+}
+.fields{
+    z-index: -1;
 }
 
 .chat{
@@ -154,6 +164,7 @@
         max-width: 150px;
     }
     .form{
+        z-index: 50;
         margin-left: 10px;
         margin-top: -50px;
         background-color: white;

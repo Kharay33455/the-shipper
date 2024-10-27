@@ -59,8 +59,9 @@
 </div>
 
 <!--COntact div-->
-<div class="contact-us-head">
-    <h1 class="rm_scrollbar">
+
+<div class="contact-us-head unset-warp">
+    <h1 class="rm_scrollbar unset-warp">
         Contact Us
     </h1>
     <p>
@@ -69,11 +70,12 @@
 </div>
 
 
+
 <!--Form field-->
 <form action="{% url 'chat:new_chat' %}" method="post">
     {% csrf_token %}
-<div class="form">
-    <div class="fields">
+<div class="form unset-warp">
+    <div class="fields unset-warp">
         <label for="topic">
             Enter topic of conversation:
         </label>
