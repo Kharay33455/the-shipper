@@ -303,9 +303,12 @@ def pfp(request):
             photo = request.FILES['photo']
             request.user.shipper.pfp = photo
             request.user.shipper.save()
+            request.user.chatuser.pfp = photo
+            request.user.chatuser.save()
             return HttpResponseRedirect(reverse('base:profile'))
         else:
             request.user.shipper.pfp.delete()
+            request.user.chatuser.pfp.delete()
             return HttpResponseRedirect(reverse('base:profile'))
     else:
         return HttpResponseRedirect(reverse('base:login'))
