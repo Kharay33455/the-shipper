@@ -1,14 +1,14 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
-<h2 style="display: flex; justify-content: center; align-items: center;">
+<h2 style="display: flex; justify-content: center; align-items: center;" class="rm_scrollbar">
     Account Overview
 </h2>
 
 <div class="profile_page" >
     <div class="card" style="padding: 30px;">
         <div class="card-body">
-            <h3>Welcome {{ request.user.first_name }},</h3>
+            <h3 class="rm_scrollbar">Welcome {{ request.user.first_name }},</h3>
             <hr>
             <div style="display: flex; justify-content: center;">
 
@@ -61,7 +61,7 @@
 </div>
 
 <div class="album py-5 bg-body-tertiary" style="background-color: white; padding: 15px;">
-    <h3>
+    <h3 class="rm_scrollbar">
         International Freight(s)
     </h3>
     <hr>

@@ -3,6 +3,16 @@
     overflow-x: hidden;
     text-overflow: ellipsis;
 }
+/* Hide scrollbar for Chrome, Safari and Opera */
+.rm_scrollbar:-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+.rm_scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 #logo {
     font-size: 40px;
     font-weight: 900;

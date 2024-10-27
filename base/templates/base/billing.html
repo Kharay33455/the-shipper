@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
-<h1>
+<h1 class="rm_scrollbar">
     Manage Billing and Invoices
 </h1>
 <p style="font-size: large;">
@@ -9,7 +9,7 @@
     it easy.
 </p>
 <div class="center padded-top">
-    <h2>
+    <h2 class="rm_scrollbar">
         What do you <span class="underline">want</span> to do today?
     </h2>
 </div>
@@ -24,7 +24,7 @@
             <div class="inner">
                 <img src="{% static 'images/prepay.png' %}" alt="">
 
-                <h3>
+                <h3 class="rm_scrollbar">
                     Pre-Pay Import or COD Charges
                 </h3>
 
@@ -43,7 +43,7 @@
             <div class="inner">
                 <img src="{% static 'images/invoice.png' %}" alt="">
 
-                <h3>
+                <h3 class="rm_scrollbar">
                     Pay an invoice
                 </h3>
 
@@ -62,7 +62,7 @@
 
                 <img src="{% static 'images/manage.png' %}" alt="">
 
-                <h3>
+                <h3 class="rm_scrollbar">
                     Manage Your Bills
                 </h3>
 
