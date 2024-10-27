@@ -16,6 +16,11 @@
     overflow-x: unset !important ;
     text-overflow: unset !important;
 }
+.set-warp{
+    white-space:nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
 .form{
     z-index: -1;
     margin-left: 50px;
