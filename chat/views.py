@@ -103,7 +103,9 @@ def create_new_ticket(request):
 
             Message.objects.create(chat = new_chat, text = auto_reply, from_support = True)
             mail = request.POST['email']
-            User.objects.get(username = request.user.username).email = mail
+            user_obj = User.objects.get(username = request.user.username)
+            user_obj.email = mail
+            user_obj.save()
             return HttpResponseRedirect(reverse('chat:single_chat', args=[chat_id]))
     else: #if user hasnt been authenticated, force them to.
         return HttpResponseRedirect(reverse('base:login'))
