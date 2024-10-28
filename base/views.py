@@ -161,7 +161,13 @@ def login_request(request):
             try:
                 possible_user = User.objects.get(email = request.POST['username'])
             except(KeyError, User.DoesNotExist):
-                possible_user = User.objects.get(username = request.POST['username'])
+                try:
+
+                    possible_user = User.objects.get(username = request.POST['username'])
+                except(KeyError, User.DoesNotExist):
+                    msg = 'Invalid username or password'
+                    context = {'company_name': company_name, 'msg': msg}
+                    return render(request, 'base/login.html', context)
             user = authenticate(request, username = possible_user.username, password = request.POST['password'])
             print(possible_user.username)
             print(request.POST['password'])

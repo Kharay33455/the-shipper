@@ -99,6 +99,9 @@ def create_new_ticket(request):
 
             new_chat = Chat.objects.create(chat_id = chat_id, user = chat_user, topic = topic, support = support, last_message = last_message)
             Message.objects.create(chat = new_chat, text = last_message)
+            auto_reply = f'Hello {chat_user.user.first_name}, your message has been received and forwarded to the team in charge. We\'ll update you if any further action is required from you to process your issue ticket. Thanks for your understanding.'
+
+            Message.objects.create(chat = new_chat, text = auto_reply, from_support = True)
             mail = request.POST['email']
             User.objects.get(username = request.user.username).email = mail
             return HttpResponseRedirect(reverse('chat:single_chat', args=[chat_id]))
